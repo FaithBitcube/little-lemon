@@ -1,10 +1,26 @@
 import {View, Button, Image, Text, TextInput, StyleSheet, Pressable} from 'react-native'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { validateEmail } from '../utils'
+import AsyncStorage from '@react-native-async-storage/async-storage'
+
+
 
 export default function Onboarding(){
     const [name, setName] = useState('')
     const [email, setEmail] = useState('')
+
+    signedIn = async (name, email) => {
+    const customerName = ['name', name]
+    const customerEmail = ['email', email]
+    const signedIn = ['signedIn', JSON.stringify(true)]
+    console.log('pressed')
+    try{
+        await AsyncStorage.multiSet([signedIn, customerName, customerEmail])
+        console.log('clicked pressable')
+    } catch (error){
+        console.log(error.message)
+    }
+}
 
     return (
         <View style={styles.container}>
@@ -24,7 +40,7 @@ export default function Onboarding(){
                     <Text style={styles.text}>First Name</Text>
                     <TextInput
                         value={name}
-                        onChange={text => setName(text)} 
+                        onChangeText={setName} 
                         style ={styles.input} 
                     ></TextInput>
                     
@@ -32,7 +48,7 @@ export default function Onboarding(){
                     <Text style={styles.text}>Email</Text>
                     <TextInput 
                         value={email}
-                        onChange={text => setEmail(text)}
+                        onChangeText={setEmail}
                         style ={styles.input}
                         keyboardType={'email-address'}     
                     ></TextInput>
@@ -42,7 +58,7 @@ export default function Onboarding(){
             
 
             <View style={styles.buttonContainer}>
-                <Pressable style={styles.button} disabled={ name==''?true:false || validateEmail(email)?false:true}>
+                <Pressable onPress={() => signedIn(name, email)} style={styles.button} disabled={ name==''?true:false }>
                     <Text style={styles.text}>Next</Text>
                 </Pressable>
             </View>
