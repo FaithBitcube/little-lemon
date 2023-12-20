@@ -44,17 +44,17 @@ export default function App() {
   return (
     <NavigationContainer>
       <Stack.Navigator screenOptions={{headerShown: false}}>
-        {
-          state ? (
+        {/* {
+          state ? ( */}
             <>
               <Stack.Screen name='Home' component={Home} />
               <Stack.Screen options={{headerTitle: () => <Header />}} screenOptions name='Profile' component={Profile} />
-              {/* <Stack.Screen name='Onboarding' component={Onboarding} /> */}
+              <Stack.Screen name='Onboarding' component={Onboarding} />
             </>
-          ) : (
+          {/* ) : (
             <Stack.Screen name='Onboarding' component={Onboarding} />
-          )
-        }
+          ) */}
+        
         
       </Stack.Navigator>
     </NavigationContainer>

@@ -14,6 +14,10 @@ export default function Profile({navigation}){
     const [specialOffers, setSpecialOffers] = useState(false)
     const [newsletter, setNewsletter] = useState(false)
 
+    const back = () => {
+        navigation.navigate('Home')
+    }
+
     saveChanges = async () => {
         const customerName = ['name', name]
         const customerLastName = ['lastname', lastName]
@@ -67,7 +71,7 @@ export default function Profile({navigation}){
 
     return (
         <>
-        <Header />
+        <Header navigateBack={back}/>
         <View style={styles.container}>
             
             <ScrollView>

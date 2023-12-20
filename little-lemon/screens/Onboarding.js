@@ -5,22 +5,26 @@ import AsyncStorage from '@react-native-async-storage/async-storage'
 
 
 
-export default function Onboarding(){
+export default function Onboarding({navigation}){
     const [name, setName] = useState('')
     const [email, setEmail] = useState('')
 
-    signedIn = async (name, email) => {
-    const customerName = ['name', name]
-    const customerEmail = ['email', email]
-    const signedIn = ['signedIn', JSON.stringify(true)]
-    console.log('pressed')
-    try{
-        await AsyncStorage.multiSet([signedIn, customerName, customerEmail])
-        console.log('clicked pressable')
-    } catch (error){
-        console.log(error.message)
+    useEffect(() => {
+        (async () => 
+            signedIn = async (name, email) => {
+        const customerName = ['name', name]
+        const customerEmail = ['email', email]
+        const signedIn = ['signedIn', JSON.stringify(true)]
+        console.log('pressed')
+        try{
+            await AsyncStorage.multiSet([signedIn, customerName, customerEmail])
+            navigation.navigate('Home')
+        } catch (error){
+            console.log(error.message)
+        }
     }
-}
+        )();
+      }, []);
 
     return (
         <View style={styles.container}>

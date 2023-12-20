@@ -1,19 +1,16 @@
 import { View, Text, Image, Pressable , StyleSheet} from "react-native";
 
-export default function Header({navigateBack}){
+export default function HomeHeader({navigateProfile}){
     return (
         <View style={styles.container}>
-            <Pressable onPress={() => {navigateBack()}}>
-                <Image 
-                source={require('../assets/arrow-icon.png')}
-                style={styles.arrow} />
-            </Pressable>
             <Image 
             source={require('../assets/logo.jpg')}
             style={styles.logo} />
-            <Image 
-            source={require('../assets/jane.jpg')}
-            style={styles.avatar} />
+            <Pressable onPress={navigateProfile}>
+                <Image 
+                source={require('../assets/jane.jpg')}
+                style={styles.avatar} />
+            </Pressable>            
         </View>
     );
 }
